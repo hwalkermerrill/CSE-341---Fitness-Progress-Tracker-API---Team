@@ -69,7 +69,7 @@ const createRecommendation = async (req, res) => {
 
         res.status(201).json({
             message: 'Exercise recommendation created successfully',
-            id: result.insertId
+            id: result.insertedId
         });
 
     } catch (error) {
