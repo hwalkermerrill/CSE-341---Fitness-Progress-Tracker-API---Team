@@ -38,10 +38,13 @@ const getSingleWorkout = async (req, res) => {
 const createWorkout = async (req, res) => {
     try {
         const workout = {
-            title: req.body.title,
-            duration: req.body.duration, // e.g., in minutes
-            date: req.body.date,
-            exercises: req.body.exercises // e.g., an array of exercises
+            userId: new ObjectId(req.body.userId), // Good practice to cast to ObjectId if provided
+            workoutType: req.body.workoutType,
+            durationMinutes: Number(req.body.durationMinutes),
+            date: req.body.date ? new Date(req.body.date) : new Date(),
+            notes: req.body.notes,
+            caloriesBurned: Number(req.body.caloriesBurned),
+            intensity: req.body.intensity
         };
 
         const response = await mongodb.getDb().collection('workouts').insertOne(workout);
@@ -63,10 +66,13 @@ const updateWorkout = async (req, res) => {
         }
         const workoutId = new ObjectId(req.params.id);
         const workout = {
-            title: req.body.title,
-            duration: req.body.duration,
-            date: req.body.date,
-            exercises: req.body.exercises
+            userId: new ObjectId(req.body.userId),
+            workoutType: req.body.workoutType,
+            durationMinutes: Number(req.body.durationMinutes),
+            date: req.body.date ? new Date(req.body.date) : new Date(),
+            notes: req.body.notes,
+            caloriesBurned: Number(req.body.caloriesBurned),
+            intensity: req.body.intensity
         };
 
         const response = await mongodb.getDb().collection('workouts').replaceOne({ _id: workoutId }, workout);
