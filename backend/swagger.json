@@ -31,12 +31,55 @@
         }
       }
     },
-    "/goals/": {
+    "/goals": {
       "get": {
-        "description": "",
+        "description": "Goals route working",
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new goal",
+        "parameters": [
+          {
+            "name": "goal",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "12345"
+                },
+                "goalName": {
+                  "type": "string",
+                  "example": "Run 10 miles"
+                },
+                "targetAmount": {
+                  "type": "number",
+                  "example": 10
+                },
+                "deadline": {
+                  "type": "string",
+                  "example": "2026-08-01"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "In Progress"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Goal created successfully"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }
