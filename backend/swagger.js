@@ -5,7 +5,7 @@ const doc = {
         title: 'Fitness Progress Tracker API',
         description: 'API documentation for Fitness Progress',
     },
-    host: 'localhost:3000',
+    host: 'cse-341-fitness-progress-tracker-api-team.onrender.com',
     schemes: ['https'],
 };
 

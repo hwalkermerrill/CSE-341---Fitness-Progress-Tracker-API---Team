@@ -5,7 +5,7 @@
     "description": "API documentation for Fitness Progress",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "cse-341-fitness-progress-tracker-api-team.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
@@ -169,12 +169,55 @@
         }
       }
     },
-    "/goals/": {
+    "/goals": {
       "get": {
-        "description": "",
+        "description": "Goals route working",
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new goal",
+        "parameters": [
+          {
+            "name": "goal",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "12345"
+                },
+                "goalName": {
+                  "type": "string",
+                  "example": "Run 10 miles"
+                },
+                "targetAmount": {
+                  "type": "number",
+                  "example": 10
+                },
+                "deadline": {
+                  "type": "string",
+                  "example": "2026-08-01"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "In Progress"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Goal created successfully"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }
@@ -182,9 +225,165 @@
     "/exerciseRecommendations/": {
       "get": {
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "exerciseName": {
+                  "example": "any"
+                },
+                "category": {
+                  "example": "any"
+                },
+                "muscleGroup": {
+                  "example": "any"
+                },
+                "difficulty": {
+                  "example": "any"
+                },
+                "equipment": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "estimatedDuration": {
+                  "example": "any"
+                },
+                "createdBy": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/exerciseRecommendations/{id}": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "exerciseName": {
+                  "example": "any"
+                },
+                "category": {
+                  "example": "any"
+                },
+                "muscleGroup": {
+                  "example": "any"
+                },
+                "difficulty": {
+                  "example": "any"
+                },
+                "equipment": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "estimatedDuration": {
+                  "example": "any"
+                },
+                "createdBy": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
