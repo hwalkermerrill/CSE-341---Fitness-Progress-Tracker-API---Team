@@ -103,6 +103,14 @@
         "description": "",
         "parameters": [
           {
+            "name": "x-user-role",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Enter admin to access this route",
+            "default": "admin"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -176,6 +184,14 @@
         "description": "",
         "parameters": [
           {
+            "name": "x-user-role",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Enter admin to access this route",
+            "default": "admin"
+          },
+          {
             "name": "id",
             "in": "path",
             "required": true,
@@ -197,6 +213,14 @@
       "put": {
         "description": "",
         "parameters": [
+          {
+            "name": "x-user-role",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Enter admin to access this route",
+            "default": "admin"
+          },
           {
             "name": "id",
             "in": "path",
