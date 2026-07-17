@@ -1,0 +1,152 @@
+### Testing Variables (Default to 0x24 for validation) ###
+@userId = 000000000000000000000000
+@goalId = 000000000000000000000000
+@workoutId = 000000000000000000000000
+@recId = 000000000000000000000000
+
+### HEALTH CHECK
+GET http://localhost:3000/
+
+### USERS ###
+# Get all users
+GET http://localhost:3000/users
+
+# Get user by ID
+GET http://localhost:3000/users/{{userId}}
+
+# Create a user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "test@example.com",
+  "role": "user",
+  "oauthProvider": "google"
+}
+
+# Update a user
+PUT http://localhost:3000/users/{{userId}}
+Content-Type: application/json
+
+{
+  "name": "Updated User",
+  "email": "updated@example.com",
+  "role": "user",
+  "oauthProvider": "google"
+}
+
+# Delete a user
+DELETE http://localhost:3000/users/{{userId}}
+
+
+### GOALS ###
+# Get all goals
+GET http://localhost:3000/goals
+
+# Get goal by ID
+GET http://localhost:3000/goals/{{goalId}}
+
+# Create a goal
+POST http://localhost:3000/goals
+Content-Type: application/json
+
+{
+  "userId": "12345",
+  "goalName": "Lose Weight",
+  "targetAmount": 10,
+  "deadline": "2026-12-31",
+  "status": "In Progress"
+}
+
+# Update a goal
+PUT http://localhost:3000/goals/{{goalId}}
+Content-Type: application/json
+
+{
+  "userId": "12345",
+  "goalName": "Lose Weight FAST",
+  "targetAmount": 15,
+  "deadline": "2027-01-15",
+  "status": "In Progress"
+}
+
+# Delete a goal
+DELETE http://localhost:3000/goals/{{goalId}}
+
+
+### WORKOUTS ###
+# Get all workouts
+GET http://localhost:3000/workouts
+
+# Get workout by ID
+GET http://localhost:3000/workouts/{{workoutId}}
+
+# Create a workout
+POST http://localhost:3000/workouts
+Content-Type: application/json
+
+{
+  "userId": "12345",
+  "workoutType": "Running",
+  "durationMinutes": 30,
+  "date": "2026-07-17",
+  "notes": "Felt good",
+  "caloriesBurned": 250,
+  "intensity": "Medium"
+}
+
+# Update a workout
+PUT http://localhost:3000/workouts/{{workoutId}}
+Content-Type: application/json
+
+{
+  "title": "Updated Workout Title",
+  "duration": 45,
+  "date": "2026-07-18",
+  "exercises": ["Warmup", "Run", "Cooldown"]
+}
+
+# Delete a workout
+DELETE http://localhost:3000/workouts/{{workoutId}}
+
+
+### EXERCISE RECOMMENDATIONS ###
+# Get all exercise recommendations
+GET http://localhost:3000/exerciseRecommendations
+
+# Get recommendation by ID
+GET http://localhost:3000/exerciseRecommendations/{{recId}}
+
+# Create a recommendation
+POST http://localhost:3000/exerciseRecommendations
+Content-Type: application/json
+
+{
+  "exerciseName": "Push-Up",
+  "category": "Strength",
+  "muscleGroup": "Chest",
+  "difficulty": "Medium",
+  "equipment": "None",
+  "description": "A basic push-up exercise",
+  "estimatedDuration": 5,
+  "createdBy": "admin"
+}
+
+# Update a recommendation
+PUT http://localhost:3000/exerciseRecommendations/{{recId}}
+Content-Type: application/json
+
+{
+  "exerciseName": "Push-Up (Advanced)",
+  "category": "Strength",
+  "muscleGroup": "Chest",
+  "difficulty": "Hard",
+  "equipment": "None",
+  "description": "Advanced push-up variation",
+  "estimatedDuration": 10,
+  "createdBy": "admin"
+}
+
+# Delete a recommendation
+DELETE http://localhost:3000/exerciseRecommendations/{{recId}}
