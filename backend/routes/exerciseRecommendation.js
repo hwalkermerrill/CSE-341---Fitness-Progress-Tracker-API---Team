@@ -7,6 +7,11 @@ const exerciseRecommendationsController =
 const { requireAdmin } =
     require('../middleware/roleMiddleware');
 
+const {
+    validateRecommendation,
+    validateRecommendationId
+} = require('../validation/exerciseRecommendation');
+
 // Anyone can view all recommendations
 router.get(
     '/',
@@ -23,6 +28,7 @@ router.get(
 router.post(
     '/',
     requireAdmin,
+    validateRecommendation,
     exerciseRecommendationsController.createRecommendation
 );
 
@@ -37,6 +43,8 @@ router.delete(
 router.put(
     '/:id',
     requireAdmin,
+    validateRecommendationId,
+    validateRecommendation,
     exerciseRecommendationsController.updateRecommendation
 );
 
