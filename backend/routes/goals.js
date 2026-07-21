@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const { validateGoal } = require('../validation/goals');
 const {
 	getAllGoals,
 	getGoalById,
@@ -9,6 +10,15 @@ const {
 	deleteGoal
 } = require('../controllers/goals');
 
+router.get('/', (req, res) => {
+	res.send('Goals route working');
+});
+
+router.post(
+	'/',
+	validateGoal,
+	createGoal
+);
 // Base Routes
 router.get('/', getAllGoals);
 router.post('/', createGoal);

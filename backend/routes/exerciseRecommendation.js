@@ -1,20 +1,51 @@
 const express = require('express');
 const router = express.Router();
 
-const exerciseRecommendationsController = require('../controllers/exerciseRecommendations');
+const exerciseRecommendationsController =
+    require('../controllers/exerciseRecommendations');
 
-// GET REQUEST FOR ALL EXERCISE RECOMMENDATIONS
-router.get('/', exerciseRecommendationsController.getAll);
+const { requireAdmin } =
+    require('../middleware/roleMiddleware');
 
-// GET REQUEST FOR EXERCISE BASED ON ID
-router.get('/:id', exerciseRecommendationsController.getSingle);
+const {
+    validateRecommendation,
+    validateRecommendationId
+} = require('../validation/exerciseRecommendation');
 
-// POST REQUEST FOR ADDING EXERCISE RECOMMENDATIONS
-router.post('/', exerciseRecommendationsController.createRecommendation);
+// Anyone can view all recommendations
+router.get(
+    '/',
+    exerciseRecommendationsController.getAll
+);
 
-// DELETE REQUEST FOR DELETING EXERCISE RECOMMENDATIONS
-router.delete('/:id', exerciseRecommendationsController.deleteRecommendation)
+// Anyone can view one recommendation
+router.get(
+    '/:id',
+    exerciseRecommendationsController.getSingle
+);
 
-// PUT REQUEST FOR UPDATING EXISTING EXERCISE
-router.put('/:id', exerciseRecommendationsController.updateRecommendation);
+// Only admins can create recommendations
+router.post(
+    '/',
+    requireAdmin,
+    validateRecommendation,
+    exerciseRecommendationsController.createRecommendation
+);
+
+// Only admins can delete recommendations
+router.delete(
+    '/:id',
+    requireAdmin,
+    exerciseRecommendationsController.deleteRecommendation
+);
+
+// Only admins can update recommendations
+router.put(
+    '/:id',
+    requireAdmin,
+    validateRecommendationId,
+    validateRecommendation,
+    exerciseRecommendationsController.updateRecommendation
+);
+
 module.exports = router;
